@@ -1,0 +1,310 @@
+:root {
+  --bg-page: #f7fafa;
+  --text-main: #0d1a12;
+  --text-muted: #52946b;
+  --accent-blue: #12a3ed;
+  --accent-green-light: #d1e5d9;
+  --card-bg: transparent;
+  --pill-bg: #e8f2ed;
+  --border-soft: #e5e8eb;
+}
+
+/* page wrapper so section sits centered like Figma */
+.booking-summary-wrapper {
+  background: var(--bg-page);
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 40px;
+}
+
+.booking-summary {
+  width: 100%;
+  max-width: 960px;
+  padding: 0 160px;
+  box-sizing: border-box;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  color: var(--text-main);
+}
+
+/* Stepper */
+.stepper {
+  padding: 16px 0;
+}
+
+.stepper-labels {
+  display: flex;
+  justify-content: center;
+  gap: 200px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.stepper-bars {
+  margin-top: 12px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.stepper-bar {
+  height: 8px;
+  border-radius: 4px;
+}
+
+.stepper-bar-full {
+  width: 295px;
+  background: var(--accent-blue);
+}
+
+.stepper-bar-part {
+  width: 295px;
+  background: var(--accent-green-light);
+  display: flex;
+  align-items: center;
+}
+
+.stepper-bar-inner {
+  width: 150px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--accent-blue);
+}
+
+.stepper-bar-empty {
+  width: 295px;
+  background: #d5eadd;
+}
+
+.stepper-subtext {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Title */
+.section-heading {
+  padding: 20px 0 12px;
+  text-align: center;
+}
+
+.section-heading h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* Slot hold bar */
+.slot-hold {
+  padding: 16px 0;
+}
+
+.slot-hold-text {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.slot-hold-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slot-hold-bar {
+  width: 806px;
+  background: var(--accent-green-light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.slot-hold-bar-fill {
+  width: 464px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--accent-blue);
+}
+
+.slot-hold-timer {
+  min-width: 84px;
+  height: 40px;
+  background: #e8f2ed;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Turf card */
+.turf-card {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.turf-card-text {
+  width: 608px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.turf-brand {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.turf-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.turf-address {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.turf-card-image {
+  flex: 1;
+  height: 171px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Field */
+.field {
+  margin-top: 12px;
+  padding: 0 15px;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.text-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 15px;
+  border-radius: 8px;
+  border: 1px solid #d1e5d9;
+  background: #f7fafa;
+  font-size: 16px;
+  color: var(--text-main);
+}
+
+/* Details grid */
+.details-grid {
+  padding: 16px 16px 0;
+  display: flex;
+  gap: 24px;
+}
+
+.detail-block {
+  width: 186px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border-soft);
+}
+
+.detail-block-wide {
+  width: 718px;
+}
+
+.detail-label {
+  display: block;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.detail-value {
+  font-size: 14px;
+}
+
+/* Payment options */
+.payment-options {
+  padding: 16px;
+}
+
+.payment-options h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.payment-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 4px;
+}
+
+.payment-pill {
+  min-width: 84px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 20px;
+  background: var(--pill-bg);
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Text under options */
+.subtext {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 4px 0;
+}
+
+/* CTA button */
+.cta-row {
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.cta-button {
+  width: 100%;
+  max-width: 480px;
+  height: 48px;
+  padding: 0 20px;
+  border-radius: 24px;
+  border: none;
+  background: var(--accent-blue);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+/* Optional responsive tweak */
+@media (max-width: 1024px) {
+  .booking-summary {
+    padding: 0 24px;
+  }
+
+  .slot-hold-bar {
+    width: 100%;
+  }
+
+  .turf-card {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .details-grid {
+    flex-direction: column;
+  }
+}

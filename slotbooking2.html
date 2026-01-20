@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Slot Booking – TurfTime</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #f5faf8;
+      --bg-card: #ffffff;
+      --text-main: #0f1a14;
+      --text-muted: #7b8f82;
+      --border-soft: #e1ece5;
+      --border-row: #e5e8eb;
+      --accent-blue: #12a3ed;
+      --accent-green: #e8f2ed;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+    }
+
+    /* NAVBAR */
+    .navbar {
+      height: 56px;
+      padding: 12px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f7faf8;
+      border-bottom: 1px solid #e5e8eb;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-logo-square {
+      width: 16px;
+      height: 16px;
+      background: #0d1c12;
+      border-radius: 2px;
+    }
+    .nav-brand {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav-search {
+      height: 32px;
+      width: 180px;
+      border-radius: 999px;
+      background: #e8f2ed;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 12px;
+      color: #52946b;
+    }
+    .nav-search-icon {
+      width: 14px;
+      height: 14px;
+      background: #52946b;
+      border-radius: 4px;
+      margin-right: 6px;
+    }
+    .nav-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    /* PAGE LAYOUT – centered column */
+    .page {
+      display: flex;
+      justify-content: center;
+      padding: 24px 0 40px;
+      min-height: calc(100vh - 56px);
+    }
+    .page-inner {
+      width: 100%;
+      max-width: 1040px; /* similar visual width to Figma panel */
+      padding: 0 32px;
+      display: flex;
+      justify-content: center;
+    }
+    .page-panel {
+      width: 720px; /* main column centered on screen */
+    }
+
+    /* COMMON CARD */
+    .card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+    }
+    .card + .card {
+      margin-top: 16px;
+    }
+
+    /* CAROUSEL */
+    .slot-header-card {
+      padding: 16px 16px 20px;
+    }
+    .slot-header-media {
+      position: relative;
+      margin-bottom: 12px;
+    }
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+    .carousel-slide {
+      min-width: 100%;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(0, 0, 0, 0.35);
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .carousel-arrow--left { left: 8px; }
+    .carousel-arrow--right { right: 8px; }
+
+    .carousel-thumbs {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .carousel-thumb {
+      flex: 1;
+      cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      padding: 0;
+      background: none;
+    }
+    .carousel-thumb img {
+      width: 100%;
+      height: 52px;
+      object-fit: cover;
+    }
+    .carousel-thumb--active {
+      border-color: var(--accent-blue);
+    }
+
+    .slot-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .slot-address {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* CALENDAR */
+    .calendar-wrapper {
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      padding: 12px 16px 16px;
+      font-size: 12px;
+    }
+    .calendar-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .calendar-header-row span {
+      font-weight: 600;
+    }
+    .calendar-nav {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+    }
+    .calendar-nav button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #52946b;
+      padding: 0;
+    }
+    .calendar-grid {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+    .calendar-grid th {
+      font-weight: 600;
+      color: #7b8f82;
+      font-size: 11px;
+      padding: 4px 0;
+    }
+    .calendar-grid td {
+      width: 32px;
+      height: 24px;
+      font-size: 11px;
+      padding: 2px;
+      cursor: pointer;
+      border-radius: 999px;
+    }
+    .calendar-grid td:hover {
+      background: #e8f2ed;
+    }
+    .calendar-day--outside {
+      color: #c1ccc5;
+    }
+    .calendar-day--selected {
+      background: var(--accent-blue);
+      color: #ffffff;
+    }
+
+    /* TIME SLOTS TABLE – SCROLLABLE */
+    .slot-table-card {
+      padding: 16px 16px 10px;
+    }
+    .slot-table-heading {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .slot-table-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .slot-table-container {
+      max-height: 280px; /* shows several rows, rest scroll */
+      overflow-y: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+    }
+    .slot-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .slot-table thead {
+      position: sticky;
+      top: 0;
+      background: #f7faf8;
+      z-index: 1;
+    }
+    .slot-table th,
+    .slot-table td {
+      padding: 8px 14px;
+      border-top: 1px solid var(--border-row);
+      text-align: left;
+      white-space: nowrap;
+      background: #ffffff;
+    }
+    .slot-table th:last-child,
+    .slot-table td:last-child {
+      text-align: right;
+    }
+    .slot-status-pill {
+      display: inline-flex;
+      padding: 3px 12px;
+      border-radius: 999px;
+      background: var(--accent-green);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    /* RATING + MAP */
+    .slot-meta-row {
+      display: flex;
+      gap: 16px;
+    }
+    .slot-rating-card {
+      flex: 0 0 180px;
+      padding: 12px 12px 10px;
+    }
+    .rating-value {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .rating-stars {
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+    .rating-meta {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+    .rating-bars {
+      margin-top: 6px;
+      font-size: 9px;
+    }
+    .rating-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 3px;
+    }
+    .rating-bar-track {
+      flex: 1;
+      height: 4px;
+      border-radius: 4px;
+      background: #e3f0e6;
+      overflow: hidden;
+    }
+    .rating-bar-fill {
+      height: 4px;
+      border-radius: 4px;
+      background: var(--accent-green);
+      width: 70%;
+    }
+    .slot-map-card {
+      flex: 1;
+      overflow: hidden;
+    }
+    .slot-map-img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    /* CTA */
+    .slot-cta-wrapper {
+      margin: 16px 0 20px;
+    }
+    .slot-cta-btn {
+      width: 100%;
+      height: 40px;
+      border-radius: 8px;
+      border: none;
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* REVIEWS */
+    .slot-reviews-card {
+      padding: 12px 16px 14px;
+    }
+    .reviews-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .reviews-tabs {
+      display: flex;
+      gap: 12px;
+      font-size: 11px;
+    }
+    .reviews-tab-active {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+    .review-item {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 8px;
+      font-size: 11px;
+      padding-top: 8px;
+    }
+    .review-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #d9e7de;
+    }
+    .review-name {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .review-meta {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .review-text {
+      font-size: 11px;
+      color: var(--text-main);
+    }
+
+    @media (max-width: 1100px) {
+      .page-inner {
+        padding: 0 16px;
+      }
+      .page-panel {
+        width: 100%;
+      }
+      .slot-meta-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <script>
+    // CALENDAR
+    document.addEventListener("DOMContentLoaded", function () {
+      const monthLabel = document.getElementById("cal-month-label");
+      const tbody = document.getElementById("cal-body");
+      if (!monthLabel || !tbody) return;
+
+      let current = new Date(2024, 6, 20); // July 2024
+
+      function renderCalendar() {
+        const year = current.getFullYear();
+        const month = current.getMonth();
+        monthLabel.textContent = current.toLocaleString("default", {
+          month: "long",
+          year: "numeric",
+        });
+        tbody.innerHTML = "";
+
+        const firstDay = new Date(year, month, 1);
+        const startWeekday = firstDay.getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const prevMonthDays = new Date(year, month, 0).getDate();
+
+        let day = 1;
+        let nextDay = 1;
+
+        for (let row = 0; row < 6; row++) {
+          const tr = document.createElement("tr");
+          for (let col = 0; col < 7; col++) {
+            const td = document.createElement("td");
+            let cellDay;
+            if (row === 0 && col < startWeekday) {
+              cellDay = prevMonthDays - startWeekday + col + 1;
+              td.textContent = cellDay;
+              td.classList.add("calendar-day--outside");
+            } else if (day > daysInMonth) {
+              td.textContent = nextDay++;
+              td.classList.add("calendar-day--outside");
+            } else {
+              cellDay = day++;
+              td.textContent = cellDay;
+              td.dataset.date = `${year}-${month + 1}-${cellDay}`;
+              td.addEventListener("click", () => {
+                tbody
+                  .querySelectorAll(".calendar-day--selected")
+                  .forEach(el => el.classList.remove("calendar-day--selected"));
+                td.classList.add("calendar-day--selected");
+              });
+              if (year === 2024 && month === 6 && cellDay === 20) {
+                td.classList.add("calendar-day--selected");
+              }
+            }
+            tr.appendChild(td);
+          }
+          tbody.appendChild(tr);
+        }
+      }
+
+      const prevBtn = document.getElementById("cal-prev");
+      const nextBtn = document.getElementById("cal-next");
+      prevBtn.onclick = () => {
+        current.setMonth(current.getMonth() - 1);
+        renderCalendar();
+      };
+      nextBtn.onclick = () => {
+        current.setMonth(current.getMonth() + 1);
+        renderCalendar();
+      };
+
+      renderCalendar();
+    });
+
+    // CAROUSEL
+    document.addEventListener("DOMContentLoaded", function () {
+      const track = document.querySelector(".carousel-track");
+      if (!track) return;
+      const slides = Array.from(track.children);
+      const thumbs = Array.from(document.querySelectorAll(".carousel-thumb"));
+      const prevBtn = document.querySelector(".carousel-arrow--left");
+      const nextBtn = document.querySelector(".carousel-arrow--right");
+      let index = 0;
+
+      function updateCarousel() {
+        track.style.transform = `translateX(${-index * 100}%)`;
+        thumbs.forEach((t, i) =>
+          t.classList.toggle("carousel-thumb--active", i === index)
+        );
+      }
+
+      thumbs.forEach((thumb, i) => {
+        thumb.addEventListener("click", () => {
+          index = i;
+          updateCarousel();
+        });
+      });
+
+      prevBtn.onclick = () => {
+        index = (index - 1 + slides.length) % slides.length;
+        updateCarousel();
+      };
+      nextBtn.onclick = () => {
+        index = (index + 1) % slides.length;
+        updateCarousel();
+      };
+
+      updateCarousel();
+    });
+
+    // BUILD 24‑HOUR TIME SLOTS
+    document.addEventListener("DOMContentLoaded", function () {
+      const tbody = document.getElementById("slot-table-body");
+      if (!tbody) return;
+
+      function toLabel(h) {
+        const suffix = h < 12 ? "AM" : "PM";
+        const hour12 = h % 12 === 0 ? 12 : h % 12;
+        return `${hour12}:00 ${suffix}`;
+      }
+
+      for (let h = 0; h < 24; h++) {
+        const tr = document.createElement("tr");
+        const tdTime = document.createElement("td");
+        const tdPrice = document.createElement("td");
+        const tdStatus = document.createElement("td");
+
+        tdTime.textContent = toLabel(h);
+        tdPrice.textContent = "$30";
+
+        const span = document.createElement("span");
+        span.className = "slot-status-pill";
+        span.textContent = "Available";
+        tdStatus.appendChild(span);
+
+        tr.appendChild(tdTime);
+        tr.appendChild(tdPrice);
+        tr.appendChild(tdStatus);
+        tbody.appendChild(tr);
+      }
+    });
+  </script>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="nav-logo-square"></div>
+      <div class="nav-brand">TurfTime</div>
+    </div>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <span>Home</span>
+        <span>Bookings</span>
+        <span>Profile</span>
+      </nav>
+      <div class="nav-search">
+        <div class="nav-search-icon"></div>
+        <span>Search</span>
+      </div>
+      <img src="https://placehold.co/32x32" alt="Profile" class="nav-avatar" />
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <main class="page">
+    <div class="page-inner">
+      <div class="page-panel">
+        <!-- MEDIA + CALENDAR -->
+        <section class="card slot-header-card">
+          <div class="slot-header-media">
+            <div class="carousel">
+              <div class="carousel-track">
+                <div class="carousel-slide">
+                  <img src="https://placehold.co/640x160?text=Image+1" alt="Stadium 1" />
+                </div>
+                <div class="carousel-slide">
+                  <img src="https://placehold.co/640x160?text=Image+2" alt="Stadium 2" />
+                </div>
+                <div class="carousel-slide">
+                  <img src="https://placehold.co/640x160?text=Image+3" alt="Stadium 3" />
+                </div>
+              </div>
+              <button class="carousel-arrow carousel-arrow--left">&#10094;</button>
+              <button class="carousel-arrow carousel-arrow--right">&#10095;</button>
+            </div>
+
+            <div class="carousel-thumbs">
+              <button class="carousel-thumb carousel-thumb--active">
+                <img src="https://placehold.co/160x52?text=1" alt="Thumb 1" />
+              </button>
+              <button class="carousel-thumb">
+                <img src="https://placehold.co/160x52?text=2" alt="Thumb 2" />
+              </button>
+              <button class="carousel-thumb">
+                <img src="https://placehold.co/160x52?text=3" alt="Thumb 3" />
+              </button>
+            </div>
+          </div>
+
+          <div class="slot-title">City Sports Arena</div>
+          <div class="slot-address">123 Main Street, Anyplace, USA</div>
+
+          <div class="calendar-wrapper">
+            <div class="calendar-header-row">
+              <span id="cal-month-label"></span>
+              <div class="calendar-nav">
+                <button id="cal-prev">Prev</button>
+                <button id="cal-next">Next</button>
+              </div>
+            </div>
+            <table class="calendar-grid">
+              <thead>
+                <tr>
+                  <th>Su</th><th>Mo</th><th>Tu</th><th>We</th>
+                  <th>Th</th><th>Fr</th><th>Sa</th>
+                </tr>
+              </thead>
+              <tbody id="cal-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- TIME SLOTS TABLE (SCROLL) -->
+        <section class="card slot-table-card">
+          <div class="slot-table-heading">Select Date</div>
+          <div class="slot-table-title">Select Time Slot</div>
+
+          <div class="slot-table-container">
+            <table class="slot-table">
+              <thead>
+                <tr>
+                  <th>Time (per hour)</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="slot-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- RATING + MAP -->
+        <section class="slot-meta-row">
+          <section class="card slot-rating-card">
+            <div class="rating-value">4.5</div>
+            <div class="rating-stars">★★★★★</div>
+            <div class="rating-meta">100 reviews</div>
+            <div class="rating-bars">
+              <div class="rating-bar-row">
+                <span>5★</span>
+                <div class="rating-bar-track"><div class="rating-bar-fill" style="width:80%;"></div></div>
+              </div>
+              <div class="rating-bar-row">
+                <span>4★</span>
+                <div class="rating-bar-track"><div class="rating-bar-fill" style="width:60%;"></div></div>
+              </div>
+              <div class="rating-bar-row">
+                <span>3★</span>
+                <div class="rating-bar-track"><div class="rating-bar-fill" style="width:30%;"></div></div>
+              </div>
+              <div class="rating-bar-row">
+                <span>2★</span>
+                <div class="rating-bar-track"><div class="rating-bar-fill" style="width:10%;"></div></div>
+              </div>
+              <div class="rating-bar-row">
+                <span>1★</span>
+                <div class="rating-bar-track"><div class="rating-bar-fill" style="width:5%;"></div></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card slot-map-card">
+            <img src="https://placehold.co/320x120?text=Map" alt="Map" class="slot-map-img" />
+          </section>
+        </section>
+
+        <!-- CTA -->
+        <div class="slot-cta-wrapper">
+          <button class="slot-cta-btn">Proceed to Payment</button>
+        </div>
+
+        <!-- REVIEWS -->
+        <section class="card slot-reviews-card">
+          <div class="reviews-header">
+            <span>Reviews</span>
+            <div class="reviews-tabs">
+              <span class="reviews-tab-active">Most Recent</span>
+              <span>Highest Rated</span>
+            </div>
+          </div>
+
+          <article class="review-item">
+            <div class="review-avatar"></div>
+            <div>
+              <div class="review-name">Liam Carter</div>
+              <div class="review-meta">5★ · 2 days ago</div>
+              <div class="review-text">
+                Great turf experience! The turf was well maintained and the staff was friendly.
+              </div>
+            </div>
+          </article>
+
+          <article class="review-item">
+            <div class="review-avatar"></div>
+            <div>
+              <div class="review-name">Sophia Evans</div>
+              <div class="review-meta">4★ · 1 week ago</div>
+              <div class="review-text">
+                Good facility overall. The lights could be brighter but booking was smooth.
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

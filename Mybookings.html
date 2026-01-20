@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bookings – TurfTime</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #fafafa;
+      --text-main: #0f1a14;
+      --text-muted: #598c6e;
+      --accent-blue: #12a3ed;
+      --tag-bg: #e8f2ed;
+      --border-soft: #d4e3d9;
+    }
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+    }
+
+    /* Navbar (same pattern as other pages, adjust name) */
+    .navbar {
+      padding: 12px 40px;
+      border-bottom: 1px solid #e5e8eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fafafa;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-logo-square {
+      width: 16px;
+      height: 16px;
+      background: #0f1a14;
+      border-radius: 2px;
+    }
+    .nav-brand {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      margin-right: 32px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav-links span {
+      cursor: pointer;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+    .nav-search {
+      height: 40px;
+      width: 40px;
+      background: #e8f2ed;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-search-icon {
+      width: 20px;
+      height: 20px;
+      background: #0f1a14;
+      border-radius: 4px;
+    }
+    .nav-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+/* Page wrapper: center everything */
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0 60px;
+}
+
+/* Main column centered with fixed max width */
+.page-inner {
+  width: 100%;
+  max-width: 1200px;      /* wide but centered */
+  margin: 0 auto;
+  padding: 0 80px;        /* side breathing room */
+}
+
+/* Title */
+.page-title {
+  padding: 0 0 8px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* Tabs and heading */
+.tabs {
+  padding-bottom: 12px;
+}
+.tabs-inner {
+  display: flex;
+  gap: 32px;
+  border-bottom: 1px solid var(--border-soft);
+  padding: 0 0 10px;        /* align with title */
+}
+.section-heading {
+  padding: 24px 0 16px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Card layout: text left, image right, all inside centered column */
+.cards {
+  padding: 0 0 8px;
+}
+
+.booking-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.booking-card-content {
+  max-width: 520px;       /* keeps text column narrow */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.booking-card-image {
+  width: 360px;
+  height: 200px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .page-inner {
+    padding: 0 24px;
+  }
+  .booking-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .booking-card-image {
+    width: 100%;
+    height: auto;
+    margin-top: 12px;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="nav-logo-square"></div>
+      <div class="nav-brand">TurfTime</div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-links">
+        <span>Home</span>
+        <span>Bookings</span>
+        <span>Profile</span>
+      </div>
+      <div class="nav-search">
+        <div class="nav-search-icon"></div>
+      </div>
+      <img src="https://placehold.co/40x40" alt="Profile" class="nav-avatar" />
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="page">
+    <div class="page-inner">
+      <h1 class="page-title">Bookings</h1>
+
+      <!-- Tabs -->
+      <section class="tabs">
+        <div class="tabs-inner">
+          <div class="tab tab--active">Upcoming</div>
+          <div class="tab tab--muted">Past</div>
+        </div>
+      </section>
+
+      <h2 class="section-heading">Upcoming Bookings</h2>
+
+      <!-- Booking cards -->
+      <section class="cards">
+        <!-- Card 1 -->
+        <article class="booking-card">
+          <div class="booking-card-content">
+            <div class="booking-card-text">
+              <span class="status">Confirmed</span>
+              <h3 class="booking-title">Soccer Match at City Arena</h3>
+              <p class="booking-meta">
+                Saturday, July 20, 2024 · 10:00 AM - 12:00 PM
+              </p>
+            </div>
+            <button class="card-button">View Details</button>
+          </div>
+          <img
+            src="https://placehold.co/320x171"
+            alt="City Arena"
+            class="booking-card-image"
+          />
+        </article>
+
+        <!-- Card 2 -->
+        <article class="booking-card">
+          <div class="booking-card-content">
+            <div class="booking-card-text">
+              <span class="status">Confirmed</span>
+              <h3 class="booking-title">Friendly Game at Community Park</h3>
+              <p class="booking-meta">
+                Sunday, July 21, 2024 · 06:00 PM - 08:00 PM
+              </p>
+            </div>
+            <button class="card-button">View Details</button>
+          </div>
+          <img
+            src="https://placehold.co/320x171"
+            alt="Community Park"
+            class="booking-card-image"
+          />
+        </article>
+
+        <!-- Card 3 -->
+        <article class="booking-card">
+          <div class="booking-card-content">
+            <div class="booking-card-text">
+              <span class="status">Confirmed</span>
+              <h3 class="booking-title">Practice Session at Sports Complex</h3>
+              <p class="booking-meta">
+                Monday, July 22, 2024 · 07:00 PM - 09:00 PM
+              </p>
+            </div>
+            <button class="card-button">View Details</button>
+          </div>
+          <img
+            src="https://placehold.co/320x171"
+            alt="Sports Complex"
+            class="booking-card-image"
+          />
+        </article>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

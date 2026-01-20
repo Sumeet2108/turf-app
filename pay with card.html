@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pay with Card – TurfTime</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #fafafa;
+      --text-main: #0d1c12;
+      --text-muted: #52946b;
+      --accent-blue: #12a3ed;
+      --accent-green: #d1e5d9;
+      --accent-green-soft: #d5eadd;
+      --field-border: #d1e8d9;
+    }
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+      border-bottom: 1px solid #e5e8eb;
+      background: #f7faf8;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-logo-square {
+      width: 16px;
+      height: 16px;
+      background: #0d1c12;
+      border-radius: 2px;
+    }
+    .nav-brand {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .nav-right {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    /* PAGE LAYOUT */
+    .page {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0 60px;   /* a bit more top/bottom space */
+}
+
+.page-inner {
+  width: 100%;
+  max-width: 960px;       /* same as design */
+  margin: 0 auto;
+  padding: 0 40px;        /* less side padding so card looks wider */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+
+    /* Title */
+   .page-title {
+  padding: 32px 0 24px;   /* more top and bottom gap around heading */
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+
+    /* Stepper */
+    .stepper {
+      padding: 0 0 12px;
+    }
+    .stepper-labels {
+      display: flex;
+      justify-content: center;
+      gap: 200px;
+      margin-bottom: 8px;
+    }
+    .stepper-bars {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .stepper-bar {
+      height: 8px;
+      border-radius: 4px;
+    }
+    .stepper-bar-full {
+      width: 295px;
+      background: var(--accent-blue);
+    }
+    .stepper-bar-mid {
+      width: 295px;
+      background: var(--accent-green);
+      display: flex;
+      align-items: center;
+    }
+    .stepper-bar-mid-inner {
+      width: 150px;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--accent-blue);
+    }
+    .stepper-bar-empty {
+      width: 295px;
+      background: var(--accent-green-soft);
+    }
+    .stepper-subtext {
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* Slot timer */
+    .slot-section {
+      padding: 8px 0 24px;
+    }
+    .slot-header {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .slot-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .slot-bar {
+      width: 100%;
+      max-width: 806px;
+      background: var(--accent-green);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .slot-bar-fill {
+      width: 464px;
+      height: 8px;
+      background: var(--accent-blue);
+      border-radius: 4px;
+    }
+    .slot-timer-pill {
+      width: 84px;
+      height: 40px;
+      background: #e8f2ed;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* Form fields */
+    .form-section {
+      padding: 0 16px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .form-row {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      gap: 16px;
+    }
+    .form-row--single {
+      max-width: 480px;
+    }
+    .input-field {
+      flex: 1;
+      height: 56px;
+      padding: 0 15px;
+      border-radius: 8px;
+      border: 1px solid var(--field-border);
+      background: #f7fcfa;
+      font-size: 16px;
+      color: #4d996b;
+    }
+    .input-field::placeholder {
+      color: #4d996b;
+    }
+
+    /* Info text */
+    .info-text-wrapper {
+      padding: 12px 16px 8px;
+      text-align: center;
+    }
+    .info-text {
+      font-size: 14px;
+      color: #4d996b;
+    }
+
+    /* CTA */
+    .cta-wrapper {
+      padding: 12px 16px 0;
+      display: flex;
+      justify-content: center;
+    }
+    .cta-btn {
+      width: 100%;
+      max-width: 480px;
+      height: 40px;
+      border-radius: 8px;
+      border: none;
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1100px) {
+      .page-inner {
+        padding: 0 24px;
+      }
+      .stepper-labels {
+        gap: 60px;
+      }
+      .form-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="nav-logo-square"></div>
+      <div class="nav-brand">TurfTime</div>
+    </div>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <span>Home</span>
+        <span>Bookings</span>
+        <span>Profile</span>
+      </nav>
+      <img src="https://placehold.co/40x40" alt="Profile" class="nav-avatar" />
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <main class="page">
+    <div class="page-inner">
+      <!-- Title -->
+      <h1 class="page-title">Pay with Card</h1>
+
+      <!-- Stepper -->
+      <section class="stepper">
+        <div class="stepper-labels">
+          <span>Your Information</span>
+          <span>Payment</span>
+          <span>Booking Confirmation</span>
+        </div>
+        <div class="stepper-bars">
+          <div class="stepper-bar stepper-bar-full"></div>
+          <div class="stepper-bar stepper-bar-mid">
+            <div class="stepper-bar-mid-inner"></div>
+          </div>
+          <div class="stepper-bar stepper-bar-empty"></div>
+        </div>
+        <p class="stepper-subtext">Your Info → Payment → Done</p>
+      </section>
+
+      <!-- Slot timer -->
+      <section class="slot-section">
+        <div class="slot-header">Slot held for 5 minutes</div>
+        <div class="slot-row">
+          <div class="slot-bar">
+            <div class="slot-bar-fill"></div>
+          </div>
+          <div class="slot-timer-pill">2:09</div>
+        </div>
+      </section>
+
+      <!-- Card form -->
+      <section class="form-section">
+        <div class="form-row form-row--single">
+          <input
+            type="text"
+            class="input-field"
+            placeholder="Card number"
+          />
+        </div>
+
+        <div class="form-row">
+          <input
+            type="text"
+            class="input-field"
+            placeholder="Expiry date"
+          />
+          <input
+            type="text"
+            class="input-field"
+            placeholder="CVV"
+          />
+        </div>
+
+        <div class="form-row form-row--single">
+          <input
+            type="text"
+            class="input-field"
+            placeholder="Cardholder name"
+          />
+        </div>
+      </section>
+
+      <!-- Info text -->
+      <section class="info-text-wrapper">
+        <p class="info-text">
+          If payment fails or timer ends, the slot will be released.
+        </p>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-wrapper">
+        <button class="cta-btn">Pay Now</button>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

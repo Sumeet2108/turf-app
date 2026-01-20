@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pay with UPI – PlayTime</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #fafafa;
+      --text-main: #0d1c12;
+      --text-muted: #52946b;
+      --accent-blue: #12a3ed;
+      --accent-green: #d1e5d9;
+      --accent-green-soft: #d5eadd;
+      --pill-bg: #e8f2ed;
+      --border-soft: #d1e8d9;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+      border-bottom: 1px solid #e5e8eb;
+      background: #fafafa;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-logo-square {
+      width: 16px;
+      height: 16px;
+      background: #0d1c12;
+      border-radius: 2px;
+    }
+    .nav-brand {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .nav-right {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-search {
+      height: 40px;
+      width: 40px;
+      max-width: 480px;
+      border-radius: 8px;
+      background: #e8f2ed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-search-icon {
+      width: 20px;
+      height: 20px;
+      background: #0d1c12;
+      border-radius: 4px;
+    }
+    .nav-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    /* PAGE LAYOUT */
+    .page {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0 60px;   /* a bit more top/bottom space */
+}
+
+.page-inner {
+  width: 100%;
+  max-width: 960px;       /* same as design */
+  margin: 0 auto;
+  padding: 0 40px;        /* less side padding so card looks wider */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+
+    /* Title */
+   .page-title {
+  padding: 32px 0 24px;   /* more top and bottom gap around heading */
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+
+    /* Stepper */
+    .stepper {
+      padding: 0 0 24px;
+    }
+    .stepper-labels {
+      display: flex;
+      justify-content: center;
+      gap: 200px;
+      margin-bottom: 8px;
+    }
+    .stepper-bars {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .stepper-bar {
+      height: 8px;
+      border-radius: 4px;
+    }
+    .stepper-bar-full {
+      width: 295px;
+      background: var(--accent-blue);
+    }
+    .stepper-bar-mid {
+      width: 295px;
+      background: var(--accent-green);
+      display: flex;
+      align-items: center;
+    }
+    .stepper-bar-mid-inner {
+      width: 150px;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--accent-blue);
+    }
+    .stepper-bar-empty {
+      width: 295px;
+      background: var(--accent-green-soft);
+    }
+    .stepper-subtext {
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* Slot timer */
+    .slot-section {
+      padding: 8px 0 24px;
+    }
+    .slot-header {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .slot-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .slot-bar {
+      width: 100%;
+      max-width: 806px;
+      background: var(--accent-green);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .slot-bar-fill {
+      width: 464px;
+      height: 8px;
+      background: var(--accent-blue);
+      border-radius: 4px;
+    }
+    .slot-timer-pill {
+      width: 84px;
+      height: 40px;
+      background: #e8f2ed;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* UPI input row */
+    .upi-row-wrapper {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: center;
+    }
+    .upi-row {
+      width: 100%;
+      max-width: 656px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: center;
+    }
+    .upi-input {
+      flex: 1;
+      height: 40px;
+      padding: 0 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+      background: #f7fcfa;
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 16px;
+      color: #4d8099;
+    }
+    .upi-input::placeholder {
+      color: #4d8099;
+    }
+    .verify-btn {
+      height: 40px;
+      min-width: 84px;
+      padding: 0 16px;
+      border-radius: 20px;
+      border: none;
+      background: var(--pill-bg);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* CTA */
+    .cta-wrapper {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: center;
+    }
+    .cta-btn {
+      height: 40px;
+      max-width: 480px;
+      width: 100%;
+      border-radius: 8px;
+      border: none;
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Info text */
+    .info-text-wrapper {
+      padding: 4px 16px 12px;
+      text-align: center;
+    }
+    .info-text {
+      font-size: 14px;
+      color: #4d996b;
+    }
+
+    @media (max-width: 1100px) {
+      .page-inner {
+        padding: 0 24px;
+      }
+      .stepper-labels {
+        gap: 40px;
+      }
+      .stepper-bars {
+        flex-direction: column;
+      }
+      .slot-bar {
+        max-width: 100%;
+      }
+      .slot-bar-fill {
+        width: 55%;
+      }
+      .upi-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .verify-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="nav-logo-square"></div>
+      <div class="nav-brand">PlayTime</div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-search">
+        <div class="nav-search-icon"></div>
+      </div>
+      <img src="https://placehold.co/40x40" alt="Profile" class="nav-avatar" />
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <main class="page">
+    <div class="page-inner">
+      <!-- Title -->
+      <h1 class="page-title">Pay with UPI</h1>
+
+      <!-- Stepper -->
+      <section class="stepper">
+        <div class="stepper-labels">
+          <span>Your Information</span>
+          <span>Payment</span>
+          <span>Booking Confirmation</span>
+        </div>
+        <div class="stepper-bars">
+          <div class="stepper-bar stepper-bar-full"></div>
+          <div class="stepper-bar stepper-bar-mid">
+            <div class="stepper-bar-mid-inner"></div>
+          </div>
+          <div class="stepper-bar stepper-bar-empty"></div>
+        </div>
+        <p class="stepper-subtext">Your Info → Payment → Done</p>
+      </section>
+
+      <!-- Slot timer -->
+      <section class="slot-section">
+        <div class="slot-header">Slot held for 5 minutes</div>
+        <div class="slot-row">
+          <div class="slot-bar">
+            <div class="slot-bar-fill"></div>
+          </div>
+          <div class="slot-timer-pill">2:09</div>
+        </div>
+      </section>
+
+      <!-- UPI input -->
+      <section class="upi-row-wrapper">
+        <div class="upi-row">
+          <input
+            type="text"
+            class="upi-input"
+            placeholder="Enter UPI ID (e.g., name@bank / 10-digit-number@upi)"
+          />
+          <button class="verify-btn">Verify UPI</button>
+        </div>
+      </section>
+
+      <!-- Proceed button -->
+      <section class="cta-wrapper">
+        <button class="cta-btn">Proceed to Pay</button>
+      </section>
+
+      <!-- Info text -->
+      <section class="info-text-wrapper">
+        <p class="info-text">
+          Your slot will be released if payment fails or timer ends
+        </p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

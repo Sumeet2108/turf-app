@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>City Sports Arena – Slot Booking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="slot-booking.css" />
+</head>
+<body>
+  <!-- Top navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <span class="nav-brand">BookMyTurf</span>
+      <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Bookings</a>
+        <a href="#">Profile</a>
+      </nav>
+    </div>
+    <div class="nav-right">
+      <div class="top-search">Search</div>
+      <img src="https://placehold.co/32x32" alt="Profile" class="profile-img">
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="content">
+      <!-- Hero images + text -->
+      <div class="hero">
+        <div class="hero-left">
+          <img src="https://placehold.co/719x404" alt="City Sports Arena" class="hero-main">
+          <div class="hero-info">
+            <h1 class="turf-title">City Sports Arena</h1>
+            <p class="turf-address">123 Main Street, Anytown, USA</p>
+          </div>
+        </div>
+        <div class="hero-right">
+          <img src="https://placehold.co/240x120" alt="Turf angle 1" class="hero-thumb">
+          <img src="https://placehold.co/240x120" alt="Turf angle 2" class="hero-thumb hero-thumb-bottom">
+        </div>
+      </div>
+
+      <!-- Calendar + slot table -->
+      <section class="booking-layout">
+        <!-- Calendar -->
+        <div class="calendar-card">
+          <div class="calendar-header">
+            <button class="cal-nav-btn">&lt;</button>
+            <div class="cal-month">July 2024</div>
+            <button class="cal-nav-btn">&gt;</button>
+          </div>
+
+          <div class="calendar-grid calendar-days">
+            <span>S</span>
+            <span>M</span>
+            <span>T</span>
+            <span>W</span>
+            <span>T</span>
+            <span>F</span>
+            <span>S</span>
+          </div>
+
+          <div class="calendar-grid calendar-dates">
+            <!-- First row example; extend as needed -->
+            <button class="cal-date">1</button>
+            <button class="cal-date">2</button>
+            <button class="cal-date">3</button>
+            <button class="cal-date selected">4</button>
+            <button class="cal-date">5</button>
+            <button class="cal-date">6</button>
+            <button class="cal-date">7</button>
+
+            <button class="cal-date">8</button>
+            <button class="cal-date">9</button>
+            <button class="cal-date">10</button>
+            <button class="cal-date">11</button>
+            <button class="cal-date">12</button>
+            <button class="cal-date">13</button>
+            <button class="cal-date">14</button>
+
+            <button class="cal-date">15</button>
+            <button class="cal-date">16</button>
+            <button class="cal-date">17</button>
+            <button class="cal-date">18</button>
+            <button class="cal-date">19</button>
+            <button class="cal-date">20</button>
+            <button class="cal-date">21</button>
+
+            <button class="cal-date">22</button>
+            <button class="cal-date">23</button>
+            <button class="cal-date">24</button>
+            <button class="cal-date">25</button>
+            <button class="cal-date">26</button>
+            <button class="cal-date">27</button>
+            <button class="cal-date">28</button>
+
+            <button class="cal-date">29</button>
+            <button class="cal-date">30</button>
+            <button class="cal-date">31</button>
+            
+            <!-- add remaining dates similarly -->
+          </div>
+        </div>
+
+        <!-- Slots -->
+        <div class="slot-card">
+          <div class="slot-header">
+            <div class="slot-header-title">Select Time Slot</div>
+          </div>
+
+          <div class="slot-table-header">
+            <div class="slot-col slot-col-time">Time (per hour)</div>
+            <div class="slot-col slot-col-price">Price</div>
+            <div class="slot-col slot-col-status">Status</div>
+          </div>
+
+          <div class="slot-rows">
+            <!-- Row template; duplicate for all times -->
+            <div class="slot-row">
+              <div class="slot-col slot-col-time">9:00 AM</div>
+              <div class="slot-col slot-col-price">$50</div>
+              <div class="slot-col slot-col-status">
+                <button class="status-pill">Available</button>
+              </div>
+            </div>
+
+            <div class="slot-row">
+              <div class="slot-col slot-col-time">10:00 AM</div>
+              <div class="slot-col slot-col-price">$50</div>
+              <div class="slot-col slot-col-status">
+                <button class="status-pill">Available</button>
+              </div>
+            </div>
+
+            <div class="slot-row">
+              <div class="slot-col slot-col-time">11:00 AM</div>
+              <div class="slot-col slot-col-price">$50</div>
+              <div class="slot-col slot-col-status">
+                <button class="status-pill">Available</button>
+              </div>
+            </div>
+
+            <!-- add remaining time slots -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Ratings + map + payment + reviews -->
+      <section class="bottom-layout">
+        <div class="left-column">
+          <article class="rating-card">
+            <div class="rating-main">
+              <div class="rating-score">4.5</div>
+              <div class="rating-meta">
+                <div class="rating-stars">★★★★☆</div>
+                <div class="rating-count">120 reviews</div>
+              </div>
+            </div>
+            <div class="rating-bars">
+              <div class="rating-bar">
+                <div class="rating-bar-fill" style="width: 80%"></div>
+              </div>
+              <div class="rating-bar">
+                <div class="rating-bar-fill" style="width: 60%"></div>
+              </div>
+              <div class="rating-bar">
+                <div class="rating-bar-fill" style="width: 40%"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="reviews-card">
+            <h2 class="section-title">Reviews</h2>
+
+            <div class="review-item">
+              <div class="review-avatar"></div>
+              <div class="review-body">
+                <div class="review-name">Sophie Carter</div>
+                <div class="review-stars">★★★★☆</div>
+                <p class="review-text">
+                  Overall experience was good. Turf was well maintained and staff was friendly.
+                </p>
+              </div>
+            </div>
+
+            <div class="review-item">
+              <div class="review-avatar"></div>
+              <div class="review-body">
+                <div class="review-name">Liam Bennett</div>
+                <div class="review-stars">★★★★☆</div>
+                <p class="review-text">
+                  Good facility but lighting could be improved for late evening matches.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="right-column">
+          <article class="map-card">
+            <div class="map-placeholder"></div>
+          </article>
+          <div class="pay-btn-wrapper">
+            <button class="pay-btn">Proceed to Payment</button>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
