@@ -25,62 +25,58 @@
 
     /* Navbar (same pattern as other pages, adjust name) */
     .navbar {
-      padding: 12px 40px;
-      border-bottom: 1px solid #e5e8eb;
+      background: #E8F2ED;
+      border-bottom: 2px solid #fff;
+      width: 100vw;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #fafafa;
+      padding: 12px 40px;
+      box-sizing: border-box;
     }
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 16px;
-    }
-    .nav-logo-square {
-      width: 16px;
-      height: 16px;
-      background: #0f1a14;
-      border-radius: 2px;
+      gap: 80px;
     }
     .nav-brand {
       font-size: 18px;
       font-weight: 700;
+      color: #0D1A12;
     }
-    .nav-links {
+    nav {
       display: flex;
-      align-items: center;
-      gap: 36px;
-      margin-right: 32px;
-      font-size: 14px;
-      font-weight: 500;
+      gap: 32px;
     }
-    .nav-links span {
-      cursor: pointer;
+    nav a {
+      font-weight: 500;
+      color: #0D1A12;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #52946B;
     }
     .nav-right {
       display: flex;
       align-items: center;
       gap: 32px;
-      flex: 1;
-      justify-content: flex-end;
     }
-    .nav-search {
-      height: 40px;
-      width: 40px;
-      background: #e8f2ed;
-      border-radius: 12px;
+    .search-bar {
+      background: #E8F2ED;
+      border-radius: 8px;
+      /*box-shadow: 3px 2px 5px 0 rgba(0,0,0,0.25);*/
+      border: 2px solid #fff;
+      padding: 6px 24px;
       display: flex;
       align-items: center;
-      justify-content: center;
     }
-    .nav-search-icon {
-      width: 20px;
-      height: 20px;
-      background: #0f1a14;
-      border-radius: 4px;
+    .search-bar span {
+      color: #52946B;
+      font-size: 16px;
     }
-    .nav-avatar {
+    .profile-img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -170,22 +166,21 @@
   </style>
 </head>
 <body>
-  <!-- Navbar -->
+  <!-- NAVBAR -->
   <header class="navbar">
     <div class="nav-left">
-      <div class="nav-logo-square"></div>
-      <div class="nav-brand">TurfTime</div>
+      <span class="nav-brand">TurfKaro</span>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Bookings</a>
+        <a href="#">Profile</a>
+      </nav>
     </div>
     <div class="nav-right">
-      <div class="nav-links">
-        <span>Home</span>
-        <span>Bookings</span>
-        <span>Profile</span>
+      <div class="search-bar">
+        <span>Search</span>
       </div>
-      <div class="nav-search">
-        <div class="nav-search-icon"></div>
-      </div>
-      <img src="https://placehold.co/40x40" alt="Profile" class="nav-avatar" />
+      <img src="https://placehold.co/40x40" alt="Profile" class="profile-img" />
     </div>
   </header>
 

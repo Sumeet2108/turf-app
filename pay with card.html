@@ -26,47 +26,62 @@
 
     /* NAVBAR */
     .navbar {
+      background: #E8F2ED;
+      border-bottom: 2px solid #fff;
+      width: 100vw;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 12px 40px;
-      border-bottom: 1px solid #e5e8eb;
-      background: #f7faf8;
+      box-sizing: border-box;
     }
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 16px;
-    }
-    .nav-logo-square {
-      width: 16px;
-      height: 16px;
-      background: #0d1c12;
-      border-radius: 2px;
+      gap: 80px;
     }
     .nav-brand {
       font-size: 18px;
       font-weight: 700;
+      color: #0D1A12;
+    }
+    nav {
+      display: flex;
+      gap: 32px;
+    }
+    nav a {
+      font-weight: 500;
+      color: #0D1A12;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #52946B;
     }
     .nav-right {
-      flex: 1;
       display: flex;
-      justify-content: flex-end;
       align-items: center;
       gap: 32px;
     }
-    .nav-links {
+    .search-bar {
+      background: #E8F2ED;
+      border-radius: 8px;
+      /*box-shadow: 3px 2px 5px 0 rgba(0,0,0,0.25);*/
+      border: 2px solid #fff;
+      padding: 6px 24px;
       display: flex;
-      gap: 36px;
-      font-size: 14px;
-      font-weight: 500;
+      align-items: center;
     }
-    .nav-avatar {
+    .search-bar span {
+      color: #52946B;
+      font-size: 16px;
+    }
+    .profile-img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
     }
-
     /* PAGE LAYOUT */
     .page {
   display: flex;
@@ -254,16 +269,18 @@
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="nav-left">
-      <div class="nav-logo-square"></div>
-      <div class="nav-brand">TurfTime</div>
+      <span class="nav-brand">TurfKaro</span>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Bookings</a>
+        <a href="#">Profile</a>
+      </nav>
     </div>
     <div class="nav-right">
-      <nav class="nav-links">
-        <span>Home</span>
-        <span>Bookings</span>
-        <span>Profile</span>
-      </nav>
-      <img src="https://placehold.co/40x40" alt="Profile" class="nav-avatar" />
+      <div class="search-bar">
+        <span>Search</span>
+      </div>
+      <img src="https://placehold.co/40x40" alt="Profile" class="profile-img" />
     </div>
   </header>
 
