@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile Settings – TurfTime</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #f5faf8;
+      --bg-card: #ffffff;
+      --text-main: #0f1a14;
+      --text-muted: #7b8f82;
+      --border-soft: #e1ece5;
+      --border-row: #e5e8eb;
+      --accent-blue: #12a3ed;
+      --accent-green: #21c45d;
+      --accent-green-light: #e8f2ed;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+    }
+
+    /* NAVBAR */
+    .navbar {
+      height: 56px;
+      padding: 12px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f7faf8;
+      border-bottom: 1px solid #e5e8eb;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-logo-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--accent-green);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: white;
+      font-weight: 700;
+    }
+    .nav-brand {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-green);
+    }
+    .nav-search {
+      height: 32px;
+      width: 180px;
+      border-radius: 999px;
+      background: #e8f2ed;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 12px;
+      color: #52946b;
+    }
+    .nav-search-icon {
+      width: 14px;
+      height: 14px;
+      background: #52946b;
+      border-radius: 4px;
+      margin-right: 6px;
+    }
+    .nav-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #d9e7de;
+    }
+
+    /* PAGE LAYOUT – centered */
+    .page {
+      display: flex;
+      justify-content: center;
+      padding: 24px 0 40px;
+      min-height: calc(100vh - 56px);
+    }
+    .page-inner {
+      width: 100%;
+      max-width: 1040px;
+      padding: 0 32px;
+      display: flex;
+      justify-content: center;
+    }
+    .page-panel {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    /* BREADCRUMBS */
+    .breadcrumbs {
+      padding: 8px 0;
+      font-size: 12px;
+    }
+    .breadcrumbs a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .breadcrumbs a:hover {
+      color: var(--accent-blue);
+    }
+    .breadcrumb-separator {
+      margin: 0 8px;
+      color: var(--text-muted);
+    }
+    .breadcrumb-active {
+      color: var(--accent-green);
+      font-weight: 600;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 24px 0;
+    }
+    .page-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+    }
+    .page-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* PROFILE CARD */
+    .card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+    }
+    .profile-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .profile-avatar-section {
+      position: relative;
+    }
+    .profile-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: #e8f2ed;
+      border: 4px solid #f8faf9;
+      position: relative;
+    }
+    .avatar-edit-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.4);
+      border-radius: 50%;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s;
+    }
+    .profile-avatar-section:hover .avatar-edit-overlay {
+      opacity: 1;
+    }
+    .avatar-camera-btn {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      border: 2px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+    .profile-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .profile-name {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 0 4px 0;
+    }
+    .profile-email {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0 0 12px 0;
+    }
+    .change-avatar-btn {
+      color: var(--accent-green);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .profile-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: #e8f2ed;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent-green);
+      border: 1px solid #d1e8d4;
+    }
+
+    /* FORM SECTION */
+    .form-section {
+      padding: 24px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+    .form-input-wrapper {
+      position: relative;
+    }
+    .form-input {
+      width: 100%;
+      height: 44px;
+      padding: 0 12px 0 40px;
+      border: 1px solid var(--border-soft);
+      border-radius: 8px;
+      font-size: 14px;
+      background: white;
+      transition: all 0.2s;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-green);
+      box-shadow: 0 0 0 3px rgba(33,196,93,0.1);
+    }
+    .form-input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: var(--text-muted);
+    }
+    .form-input.readonly {
+      background: #f8faf9;
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+    .form-input.readonly + .form-input-icon {
+      color: #a1b5a8;
+    }
+    .form-input-lock {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+    .form-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 12px;
+      border: 1px solid var(--border-soft);
+      border-radius: 8px;
+      font-size: 14px;
+      background: white;
+      resize: vertical;
+      transition: all 0.2s;
+    }
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent-green);
+      box-shadow: 0 0 0 3px rgba(33,196,93,0.1);
+    }
+
+    /* NOTIFICATION TOGGLE */
+    .notification-toggle {
+      padding: 20px 0;
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .toggle-label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .toggle-title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .toggle-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .toggle-switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      background: #e1ece5;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .toggle-switch.checked {
+      background: var(--accent-green);
+    }
+    .toggle-slider {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+    .toggle-switch.checked .toggle-slider {
+      transform: translateX(20px);
+    }
+
+    /* ACTION BUTTONS */
+    .action-buttons {
+      padding: 20px 24px;
+      background: #f8faf9;
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+    .btn {
+      height: 40px;
+      padding: 0 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border-soft);
+    }
+    .btn-secondary:hover {
+      background: #f8faf9;
+      border-color: var(--border-row);
+    }
+    .btn-primary {
+      background: var(--accent-green);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #1ea750;
+    }
+
+    @media (max-width: 768px) {
+      .page-inner {
+        padding: 0 16px;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="nav-logo">
+        <div class="nav-logo-icon">⚽</div>
+        <div class="nav-brand">TurfTime</div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="home2.html">Dashboard</a>
+        <a href="Mybookings.html">Bookings</a>
+        <a href="#" class="active">Profile</a>
+      </nav>
+      <div class="nav-search">
+        <div class="nav-search-icon"></div>
+        <span>Search</span>
+      </div>
+      <div class="nav-avatar"></div>
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <main class="page">
+    <div class="page-inner">
+      <div class="page-panel">
+        <!-- BREADCRUMBS -->
+        <nav class="breadcrumbs">
+          <a href="home2.html">
+            <span>⚡</span> Dashboard
+          </a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-active">Profile Settings</span>
+        </nav>
+
+        <!-- PAGE HEADER -->
+        <header class="page-header">
+          <h1 class="page-title">Profile Settings</h1>
+          <p class="page-subtitle">Manage your personal information and contact details.</p>
+        </header>
+
+        <!-- PROFILE CARD -->
+        <section class="card">
+          <!-- PROFILE HEADER -->
+          <div class="profile-header">
+            <div class="profile-avatar-section">
+              <div class="profile-avatar"></div>
+              <div class="avatar-edit-overlay">
+                <span>✏️</span>
+              </div>
+              <button class="avatar-camera-btn" title="Change photo">
+                📷
+              </button>
+            </div>
+            <div class="profile-info">
+              <h2 class="profile-name">Alex Johnson</h2>
+              <p class="profile-email">alex.j@example.com</p>
+              <a href="#" class="change-avatar-btn">Change Avatar</a>
+            </div>
+            <div class="profile-badge">
+              <span>✅</span>
+              Verified Member
+            </div>
+          </div>
+
+          <!-- FORM -->
+          <div class="form-section">
+            <div class="form-grid">
+              <!-- Full Name -->
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="text" value="Alex Johnson" />
+                  <span class="form-input-icon">👤</span>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input readonly" type="email" value="alex.j@example.com" readonly />
+                  <span class="form-input-icon">✉️</span>
+                  <span class="form-input-lock">🔒</span>
+                </div>
+              </div>
+
+              <!-- Phone -->
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="tel" value="+1 (555) 123-4567" />
+                  <span class="form-input-icon">📞</span>
+                </div>
+              </div>
+
+              <!-- Zip Code -->
+              <div class="form-group">
+                <label class="form-label">Zip Code</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="text" value="94103" />
+                  <span class="form-input-icon">📍</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+              <label class="form-label">Billing Address</label>
+              <textarea class="form-textarea">123 Market Street, Suite 400
+San Francisco, CA 94103</textarea>
+            </div>
+
+            <!-- Notification Toggle -->
+            <div class="notification-toggle">
+              <div class="toggle-label">
+                <div class="toggle-title">Email Notifications</div>
+                <div class="toggle-desc">Receive updates about your bookings and exclusive offers.</div>
+              </div>
+              <div class="toggle-switch checked">
+                <div class="toggle-slider"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACTION BUTTONS -->
+          <div class="action-buttons">
+            <a href="#" class="btn btn-secondary">Cancel</a>
+            <button class="btn btn-primary">
+              <span>💾</span>
+              Save Changes
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -15,65 +15,63 @@
       color: #0D1A12;
       width: 100vw;
     }
-    /* NAVBAR */
     .navbar {
-      height: 56px;
-      padding: 12px 40px;
+      background: #E8F2ED;
+      border-bottom: 2px solid #fff;
+      width: 100vw;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #f7faf8;
-      border-bottom: 1px solid #e5e8eb;
+      padding: 12px 40px;
+      box-sizing: border-box;
     }
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 16px;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .nav-logo-icon {
-      width: 24px;
-      height: 24px;
-      background: var(--accent-green);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: white;
-      font-weight: 700;
+      gap: 32px;
     }
     .nav-brand {
       font-size: 18px;
       font-weight: 700;
+      color: #0D1A12;
+    }
+    nav {
+      display: flex;
+      gap: 32px;
+    }
+    nav a {
+      font-weight: 500;
+      color: #0D1A12;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #52946B;
     }
     .nav-right {
       display: flex;
       align-items: center;
       gap: 32px;
-      flex: 1;
-      justify-content: flex-end;
     }
-    .nav-links {
+    .search-bar {
+      background: #E8F2ED;
+      border-radius: 8px;
+      box-shadow: 3px 2px 5px 0 rgba(0,0,0,0.25);
+      border: 2px solid #fff;
+      padding: 6px 24px;
       display: flex;
-      gap: 24px;
-      font-size: 14px;
-      font-weight: 500;
+      align-items: center;
     }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-muted);
-      transition: color 0.2s;
+    .search-bar span {
+      color: #52946B;
+      font-size: 16px;
     }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--accent-green);
+    .profile-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
     }
-    
     .main-section {
       padding: 32px 160px;
       box-sizing: border-box;
@@ -87,7 +85,7 @@
       border-radius: 8px;
       border: 2px solid #fff;
       background: #E8F2ED;
-      /* box-shadow: 3px 2px 5px 0 rgba(0,0,0,0.25); */
+      box-shadow: 3px 2px 5px 0 rgba(0,0,0,0.25);
       font-size: 15px;
       color: #0D1A12;
       outline: none;
@@ -101,7 +99,7 @@
     .view-more-btn {
       background: #E8F2ED;
       border-radius: 8px;
-      /* box-shadow: 3px 2px 5px 0 rgba(0,0,0,0.25); */
+      box-shadow: 3px 2px 5px 0 rgba(0,0,0,0.25);
       border: 2px solid #fff;
       font-weight: 700;
       padding: 10px 22px;
@@ -111,8 +109,6 @@
       transition: background 0.2s, color 0.2s;
     }
     .button-group button:hover,
-    .card-details button:hover,	
-    .card-details a:hover,
     .view-more-btn:hover {
       background: #52946B;
       color: #fff;
@@ -136,7 +132,7 @@
       align-items: center;
       padding: 20px;
       border: 2px solid #fff;
-      /* margin-bottom: 16px; */
+      margin-bottom: 16px;
       box-sizing: border-box;
     }
     .card-details {
@@ -161,30 +157,27 @@
       font-size: 18px;
       font-weight: 700;
     }
-    .card-details button, .card-details a {
+    .card-details button {
       margin-top: 8px;
-      border: 2px solid #fff;   /* White stroke */
+      border: 2px solid #fff;
       border-radius: 8px;
       background: #E8F2ED;
       padding: 8px 16px;
-      box-shadow: 3px 2px 5px rgba(0,0,0,0.25);
+      box-shadow: 3px 2px 5px 0 rgba(0,0,0,0.25);
       font-weight: 500;
       color: #0F1A14;
       cursor: pointer;
       font-size: 14px;
       transition: background 0.2s;
-      text-decoration: none;
-      display: flex;
-      justify-content: center;
     }
     .card img {
-      max-width: 276px;
+      max-width: 211px;
       width: 100%;
-      height: 171px;
+      height: 132px;
       object-fit: cover;
       border-radius: 12px;
       border: 2px solid #fff;
-      /* box-shadow: 3px 2px 5px 0 rgba(0,0,0,0.25); */
+      box-shadow: 3px 2px 5px 0 rgba(0,0,0,0.25);
       background: #d4e8dc;
     }
     .view-more-btn {
@@ -215,24 +208,22 @@
   </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <header class="navbar">
+  <div class="navbar">
     <div class="nav-left">
-      <div class="nav-logo">
-        <div class="nav-logo-icon">⚽</div>
-        <div class="nav-brand">TurfTime</div>
-      </div>
+      <span class="nav-brand">TurfKaro</span>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Bookings</a>
+        <a href="#">Profile</a>
+      </nav>
     </div>
     <div class="nav-right">
-      <nav class="nav-links">
-        <a href="home2.html">Dashboard</a>
-        <a href="Mybookings.html">Bookings</a>
-        <a href="#" class="active">Profile</a>
-      </nav>
-      <div class="nav-avatar"></div>
+      <div class="search-bar">
+        <span>Search</span>
+      </div>
+      <img src="https://placehold.co/40x40" alt="Profile" class="profile-img" />
     </div>
-  </header>
-
+  </div>
   <main class="main-section">
     <input class="search-input" type="text" placeholder="Search by Turf Name or Area">
     <div class="button-group">
@@ -248,37 +239,36 @@
           <span class="available">Available</span>
           <span class="arena">City Arena</span>
           <span class="slots">Slot Available: 10-12am, 2-4pm</span>
-          <a href="slotbooking2.html">View Details</a>
+          <button>View Details</button>
         </div>
-        <img src="https://placehold.co/276x171" alt="City Arena Turf">
+        <img src="https://placehold.co/211x132" alt="City Arena Turf">
       </div>
       <div class="card">
         <div class="card-details">
           <span class="available">Available</span>
           <span class="arena">City Arena</span>
           <span class="slots">Slot Available: 10-12am, 2-4pm</span>
-          <a href="slotbooking2.html">View Details</a>
+          <button>View Details</button>
         </div>
-        <img src="https://placehold.co/276x171" alt="City Arena Turf">
+        <img src="https://placehold.co/211x132" alt="City Arena Turf">
       </div>
       <div class="card">
         <div class="card-details">
           <span class="available">Available</span>
           <span class="arena">City Arena</span>
           <span class="slots">Slot Available: 10-12am, 2-4pm</span>
-          <!-- <button>View Details</button> -->
-          <a href="slotbooking2.html">View Details</a>
+          <button>View Details</button>
         </div>
-        <img src="https://placehold.co/276x171" alt="City Arena Turf">
+        <img src="https://placehold.co/211x132" alt="City Arena Turf">
       </div>
       <div class="card">
         <div class="card-details">
           <span class="available">Available</span>
           <span class="arena">City Arena</span>
           <span class="slots">Slot Available: 10-12am, 2-4pm</span>
-          <a href="slotbooking2.html">View Details</a>
+          <button>View Details</button>
         </div>
-        <img src="https://placehold.co/276x171" alt="City Arena Turf">
+        <img src="https://placehold.co/211x132" alt="City Arena Turf">
       </div>
     </div>
     <button class="view-more-btn">View More</button>
