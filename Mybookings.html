@@ -2,23 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Bookings – TurfTime</title>
+  <title>My Bookings – TurfTime</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-page: #fafafa;
-      --text-main: #0f1a14;
-      --text-muted: #598c6e;
-      --accent-blue: #12a3ed;
-      --tag-bg: #e8f2ed;
-      --border-soft: #d4e3d9;
+      --bg-page: #f6f8f7;
+      --text-main: #0d171b;
+      --text-muted: #4c809a;
+      --border-light: #e7eff3;
+      --border-tab: #cfdfe7;
+      --bg-light: #e7eff3;
+      --accent-blue: #13a4ec;
     }
+
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      font-family: "Plus Jakarta Sans", Inter, "Noto Sans", sans-serif;
       background: var(--bg-page);
       color: var(--text-main);
     }
@@ -26,38 +28,31 @@
     /* NAVBAR */
     .navbar {
       height: 56px;
-      padding: 0px 40px;
+      padding: 12px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #f7faf8;
-      border-bottom: 1px solid #e5e8eb;
+      background: white;
+      border-bottom: 1px solid var(--border-light);
     }
     .nav-left {
       display: flex;
       align-items: center;
       gap: 16px;
     }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
     .nav-logo-icon {
-      width: 24px;
-      height: 24px;
-      background: var(--accent-green);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: white;
-      font-weight: 700;
+      width: 16px;
+      height: 16px;
+    }
+    .nav-logo-icon svg {
+      width: 100%;
+      height: 100%;
     }
     .nav-brand {
       font-size: 18px;
       font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.015em;
     }
     .nav-right {
       display: flex;
@@ -68,207 +63,284 @@
     }
     .nav-links {
       display: flex;
-      gap: 24px;
+      gap: 36px;
       font-size: 14px;
       font-weight: 500;
+      line-height: 1.4;
     }
     .nav-links a {
+      color: var(--text-main);
       text-decoration: none;
-      color: var(--text-muted);
-      transition: color 0.2s;
     }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color:  #21c45d;
+    .nav-bell {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--bg-light);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      padding: 0;
     }
     .nav-avatar {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      background: #d9e7de;
+      background-image: url('https://placehold.co/40x40');
+      background-size: cover;
+    }
+
+    /* PAGE LAYOUT */
+    .page {
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+      min-height: calc(100vh - 56px);
+    }
+    .page-inner {
+      width: 100%;
+      max-width: 960px;
+      padding: 0 64px;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .page-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0;
+      min-width: 288px;
+    }
+
+    /* TABS */
+    .tabs {
+      padding: 0 16px 12px;
+      border-bottom: 1px solid var(--border-tab);
+    }
+    .tab-list {
+      display: flex;
+      gap: 32px;
+    }
+    .tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0;
+      position: relative;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.015em;
+      line-height: 1.2;
+      text-decoration: none;
+    }
+    .tab.active {
+      color: var(--text-main);
+    }
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 3px;
+      background: var(--accent-blue);
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      padding: 20px 16px 12px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+    }
+
+    /* BOOKING CARDS */
+    .booking-grid {
+      padding: 0 16px;
+    }
+    .booking-card {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px;
+      border-radius: 12px;
+      background: white;
+      border: 1px solid var(--border-light);
+      margin-bottom: 16px;
+    }
+    .booking-content {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .booking-status {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+    .booking-title {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .booking-details {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+    .booking-btn {
+      height: 32px;
+      padding: 0 16px;
+      border-radius: 8px;
+      background: var(--bg-light);
+      border: none;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.4;
       cursor: pointer;
+      align-self: flex-start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
     }
-    
-    .nav-avatar:hover {
-      border: 1px solid #21c45d;
+    .booking-btn:hover {
+      background: #d9e7de;
+    }
+    .booking-image {
+      flex: 1;
+      width: 100%;
+      height: 120px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
     }
 
-/* Page wrapper: center everything */
-.page {
-  display: flex;
-  justify-content: center;
-  padding: 40px 0 60px;
-}
+    @media (max-width: 1024px) {
+      .page-inner {
+        padding: 0 40px;
+      }
+    }
 
-/* Main column centered with fixed max width */
-.page-inner {
-  width: 100%;
-  max-width: 1200px;      /* wide but centered */
-  margin: 0 auto;
-  padding: 0 80px;        /* side breathing room */
-}
-
-/* Title */
-.page-title {
-  padding: 0 0 8px;
-  font-size: 32px;
-  font-weight: 700;
-}
-
-/* Tabs and heading */
-.tabs {
-  padding-bottom: 12px;
-}
-.tabs-inner {
-  display: flex;
-  gap: 32px;
-  border-bottom: 1px solid var(--border-soft);
-  padding: 0 0 10px;        /* align with title */
-}
-.section-heading {
-  padding: 24px 0 16px;
-  font-size: 22px;
-  font-weight: 700;
-}
-
-/* Card layout: text left, image right, all inside centered column */
-.cards {
-  padding: 0 0 8px;
-}
-
-.booking-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-}
-
-.booking-card-content {
-  max-width: 520px;       /* keeps text column narrow */
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.booking-card-image {
-  width: 360px;
-  height: 200px;
-  border-radius: 16px;
-  object-fit: cover;
-}
-
-/* Responsive */
-@media (max-width: 1100px) {
-  .page-inner {
-    padding: 0 24px;
-  }
-  .booking-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .booking-card-image {
-    width: 100%;
-    height: auto;
-    margin-top: 12px;
-  }
-}
-
-
+    @media (max-width: 768px) {
+      .page-inner {
+        padding: 0 20px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .page-header {
+        justify-content: flex-start;
+      }
+      .booking-card {
+        flex-direction: column;
+      }
+      .booking-image {
+        order: -1;
+        height: 160px;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="nav-left">
-      <div class="nav-logo">
-        <div class="nav-logo-icon">⚽</div>
-        <div class="nav-brand">TurfTime</div>
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 48 48" fill="none">
+          <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"/>
+        </svg>
       </div>
+      <div class="nav-brand">TurfTime</div>
     </div>
     <div class="nav-right">
       <nav class="nav-links">
-        <a href="home2.html">Dashboard</a>
-        <a href="Mybookings.html">Bookings</a>
-        <!-- <a href="#" class="active">Profile</a> -->
+        <a href="home2.html">Home</a>
+        <a href="#" class="active">Bookings</a>
+        <a href="profile-settings.html">Profile</a>
       </nav>
-      <a href="profile2.html" class="nav-avatar"></a>
+      <button class="nav-bell" title="Notifications">🔔</button>
+      <div class="nav-avatar"></div>
     </div>
   </header>
 
-  <!-- Content -->
+  <!-- PAGE -->
   <main class="page">
     <div class="page-inner">
-      <h1 class="page-title">Bookings</h1>
+      <div class="page-panel">
+        <!-- PAGE HEADER -->
+        <header class="page-header">
+          <h1 class="page-title">Bookings</h1>
+        </header>
 
-      <!-- Tabs -->
-      <section class="tabs">
-        <div class="tabs-inner">
-          <div class="tab tab--active">Upcoming</div>
-          <div class="tab tab--muted">Past</div>
-        </div>
-      </section>
+        <!-- TABS -->
+        <nav class="tabs">
+          <div class="tab-list">
+            <a href="#" class="tab active">Upcoming</a>
+            <a href="#" class="tab">Past</a>
+          </div>
+        </nav>
 
-      <h2 class="section-heading">Upcoming Bookings</h2>
+        <!-- SECTION HEADER -->
+        <header class="section-header">
+          Upcoming Bookings
+        </header>
 
-      <!-- Booking cards -->
-      <section class="cards">
-        <!-- Card 1 -->
-        <article class="booking-card">
-          <div class="booking-card-content">
-            <div class="booking-card-text">
-              <span class="status">Confirmed</span>
+        <!-- BOOKING CARDS -->
+        <div class="booking-grid">
+          <!-- Booking 1 -->
+          <article class="booking-card">
+            <div class="booking-content">
+              <div class="booking-status">Confirmed</div>
               <h3 class="booking-title">Soccer Match at City Arena</h3>
-              <p class="booking-meta">
-                Saturday, July 20, 2024 · 10:00 AM - 12:00 PM
-              </p>
+              <div class="booking-details">Saturday, July 20, 2024 · 10:00 AM - 12:00 PM</div>
+              <button class="booking-btn">View Details</button>
             </div>
-            <button class="card-button">View Details</button>
-          </div>
-          <img
-            src="https://placehold.co/320x171"
-            alt="City Arena"
-            class="booking-card-image"
-          />
-        </article>
+            <div class="booking-image" style="background-image: url('https://placehold.co/320x120?text=Stadium')"></div>
+          </article>
 
-        <!-- Card 2 -->
-        <article class="booking-card">
-          <div class="booking-card-content">
-            <div class="booking-card-text">
-              <span class="status">Confirmed</span>
+          <!-- Booking 2 -->
+          <article class="booking-card">
+            <div class="booking-content">
+              <div class="booking-status">Confirmed</div>
               <h3 class="booking-title">Friendly Game at Community Park</h3>
-              <p class="booking-meta">
-                Sunday, July 21, 2024 · 06:00 PM - 08:00 PM
-              </p>
+              <div class="booking-details">Sunday, July 21, 2024 · 06:00 PM - 08:00 PM</div>
+              <button class="booking-btn">View Details</button>
             </div>
-            <button class="card-button">View Details</button>
-          </div>
-          <img
-            src="https://placehold.co/320x171"
-            alt="Community Park"
-            class="booking-card-image"
-          />
-        </article>
+            <div class="booking-image" style="background-image: url('https://placehold.co/320x120?text=Park')"></div>
+          </article>
 
-        <!-- Card 3 -->
-        <article class="booking-card">
-          <div class="booking-card-content">
-            <div class="booking-card-text">
-              <span class="status">Confirmed</span>
+          <!-- Booking 3 -->
+          <article class="booking-card">
+            <div class="booking-content">
+              <div class="booking-status">Confirmed</div>
               <h3 class="booking-title">Practice Session at Sports Complex</h3>
-              <p class="booking-meta">
-                Monday, July 22, 2024 · 07:00 PM - 09:00 PM
-              </p>
+              <div class="booking-details">Monday, July 22, 2024 · 07:00 PM - 09:00 PM</div>
+              <button class="booking-btn">View Details</button>
             </div>
-            <button class="card-button">View Details</button>
-          </div>
-          <img
-            src="https://placehold.co/320x171"
-            alt="Sports Complex"
-            class="booking-card-image"
-          />
-        </article>
-      </section>
+            <div class="booking-image" style="background-image: url('https://placehold.co/320x120?text=Complex')"></div>
+          </article>
+        </div>
+      </div>
     </div>
   </main>
 </body>
