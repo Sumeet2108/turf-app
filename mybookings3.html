@@ -139,17 +139,16 @@
       gap: 16px;
     }
     .booking-card {
-      background: #E8F2ED;
+      background: var(--btn-bg);
       border-radius: 12px;
       box-shadow: 3px 2px 5px 0 rgba(0,0,0,0.25);
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 20px;
-      border: 2px solid #fff;
+      border: 2px solid var(--bg-card);
       /* margin-bottom: 16px; */
       box-sizing: border-box;
-    }
     }
     .booking-info {
       display: flex;
@@ -173,20 +172,23 @@
     }
     .details-btn {
       margin-top: 8px;
-      border: 2px solid #fff;   /* White stroke */
+      border: 2px solid var(--bg-card);   /* White stroke */
       border-radius: 8px;
-      background: #E8F2ED;
+      background: var(--btn-bg);
       padding: 8px 16px;
       box-shadow: 3px 2px 5px rgba(0,0,0,0.25);
       font-weight: 500;
-      color: #0F1A14;
+      color: var(--text-main);
       cursor: pointer;
       font-size: 14px;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.08s;
       text-decoration: none;
-      display: flex;
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
     }
+    .details-btn:hover { background: #dbe7ee; transform: translateY(-1px); }
+    .details-btn:focus { outline: 3px solid rgba(33,196,93,0.15); outline-offset: 2px; }
     .booking-card img {
       width: 240px;
       height: 135px;
@@ -249,7 +251,7 @@
             <div class="turf-name">Soccer Match at City Arena</div>
             <div class="booking-time">Saturday, July 20, 2024 · 10:00 AM - 12:00 PM</div>
           </div>
-          <a href="#" class="details-btn">View Details</a>
+          <button type="button" class="details-btn">View Details</button>
         </div>
         <img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=400" alt="City Arena">
       </div>
@@ -261,7 +263,7 @@
             <div class="turf-name">Friendly Game at Community Park</div>
             <div class="booking-time">Sunday, July 21, 2024 · 06:00 PM - 08:00 PM</div>
           </div>
-          <a href="#" class="details-btn">View Details</a>
+          <button type="button" class="details-btn">View Details</button>
         </div>
         <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400" alt="Community Park">
       </div>
@@ -273,7 +275,7 @@
             <div class="turf-name">Practice Session at Sports Complex</div>
             <div class="booking-time">Monday, July 22, 2024 · 07:00 PM - 09:00 PM</div>
           </div>
-          <a href="#" class="details-btn">View Details</a>
+          <button type="button" class="details-btn">View Details</button>
         </div>
         <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=400" alt="Sports Complex">
       </div>
