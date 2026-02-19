@@ -304,10 +304,16 @@
       display: inline-flex;
       padding: 3px 12px;
       border-radius: 999px;
-      background: var(--accent-green);
       font-size: 11px;
       font-weight: 500;
-      color: var(--text-main);
+    }
+    .slot-status-pill.available {
+      background: #E8F2ED;
+      color: #000000;
+    }
+    .slot-status-pill.not-available {
+      background: #E8F2ED;
+      color: #000000;
     }
 
     /* RATING + MAP */
@@ -573,7 +579,16 @@
 
         const span = document.createElement("span");
         span.className = "slot-status-pill";
-        span.textContent = "Available";
+        
+        // Alternate between available and not-available, with some not-available slots
+        const isAvailable = h % 3 !== 0; // Make every 3rd slot unavailable
+        if (isAvailable) {
+          span.classList.add("available");
+          span.textContent = "Available";
+        } else {
+          span.classList.add("not-available");
+          span.textContent = "Not Available";
+        }
         tdStatus.appendChild(span);
 
         tr.appendChild(tdTime);
@@ -595,8 +610,8 @@
     </div>
     <div class="nav-right">
       <nav class="nav-links">
-        <a href="home2.html">Dashboard</a>
-        <a href="Mybookings.html">Bookings</a>
+        <a href="index.html">Dashboard</a>
+        <a href="mybookings3.html">Bookings</a>
         <!-- <a href="#" class="active">Profile</a> -->
       </nav>
       <a href="profile2.html" class="nav-avatar"></a>

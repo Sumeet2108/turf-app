@@ -244,6 +244,11 @@
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
+      transition: background 0.3s;
+    }
+    .verify-btn.verified {
+      background: #21c45d;
+      color: #ffffff;
     }
 
     /* CTA */
@@ -312,8 +317,8 @@
     </div>
     <div class="nav-right">
       <nav class="nav-links">
-        <a href="home2.html">Dashboard</a>
-        <a href="Mybookings.html">Bookings</a>
+        <a href="index.html">Dashboard</a>
+        <a href="mybookings3.html">Bookings</a>
         <!-- <a href="#" class="active">Profile</a> -->
       </nav>
       <a href="profile2.html" class="nav-avatar"></a>
@@ -379,5 +384,18 @@
       </section>
     </div>
   </main>
+
+  <script>
+    // Handle Verify UPI button click to turn green
+    document.addEventListener("DOMContentLoaded", function() {
+      const verifyBtn = document.querySelector(".verify-btn");
+      if (verifyBtn) {
+        verifyBtn.addEventListener("click", function() {
+          this.classList.add("verified");
+          this.textContent = "✓ Verified";
+        });
+      }
+    });
+  </script>
 </body>
 </html>

@@ -163,6 +163,12 @@
       border: 2px solid #fff;
       /* margin-bottom: 16px; */
       box-sizing: border-box;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 3px 4px 8px 0 rgba(0,0,0,0.35);
     }
     .card-details {
       display: flex;
@@ -211,6 +217,63 @@
       border: 2px solid #fff;
       /* box-shadow: 3px 2px 5px 0 rgba(0,0,0,0.25); */
       background: #d4e8dc;
+      cursor: pointer;
+    }
+    .card img:hover {
+      opacity: 0.9;
+    }
+    /* Modal/Lightbox Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      animation: fadeIn 0.3s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      position: relative;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 90vw;
+      max-height: 90vh;
+      animation: slideUp 0.3s;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-content img {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 8px;
+      display: block;
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 32px;
+      font-weight: bold;
+      color: #0D1A12;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover {
+      color: #21c45d;
     }
     .view-more-btn {
       background: #38E07A;
@@ -251,7 +314,7 @@
     <div class="nav-right">
       <nav class="nav-links">
         <a href="index.html">Dashboard</a>
-        <a href="Mybookings.html">Bookings</a>
+        <a href="mybookings3.html">Bookings</a>
         <!-- <a href="profile2.html" class="active"></a> -->
       </nav>
       <a href="profile2.html" class="nav-avatar"></a>
@@ -308,5 +371,67 @@
     </div>
     <button class="view-more-btn">View More</button>
   </main>
-</body>
-</html>
+
+  <!-- Image Modal/Lightbox -->
+  <div id="imageModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeImageModal()">&times;</span>
+      <img id="modalImage" src="" alt="Enlarged view">
+    </div>
+  </div>
+
+  <script>
+    // Make entire card clickable
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        // Prevent navigation if clicking on the image (which has its own handler)
+        if (e.target.tagName === 'IMG') {
+          e.stopPropagation();
+          return;
+        }
+        // Navigate to the details page
+        const link = this.querySelector('a[href]');
+        if (link) {
+          window.location.href = link.href;
+        }
+      });
+    });
+
+    // Handle image click to open lightbox
+    document.querySelectorAll('.card img').forEach(img => {
+      img.addEventListener('click', function(e) {
+        e.stopPropagation();
+        openImageModal(this.src);
+      });
+    });
+
+    // Open image modal
+    function openImageModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      modalImage.src = imageSrc;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close image modal
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside the content
+    document.getElementById('imageModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeImageModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeImageModal();
+      }
+    });
+  </script>
