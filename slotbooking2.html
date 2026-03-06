@@ -450,6 +450,65 @@
   </style>
 
   <script>
+    let reservations = [];
+    let selectedDate = null;
+
+    function toLabel(h) {
+      const suffix = h < 12 ? "AM" : "PM";
+      const hour12 = h % 12 === 0 ? 12 : h % 12;
+      return `${hour12}:00 ${suffix}`;
+    }
+
+    function renderSlots() {
+      const tbodySlots = document.getElementById("slot-table-body");
+      const heading = document.querySelector('.slot-table-heading');
+      if (heading) {
+        heading.textContent = selectedDate || 'Select Date';
+      }
+      if (!tbodySlots) return;
+      tbodySlots.innerHTML = "";
+
+      for (let h = 0; h < 24; h++) {
+        const tr = document.createElement("tr");
+        const tdTime = document.createElement("td");
+        const tdPrice = document.createElement("td");
+        const tdStatus = document.createElement("td");
+
+        tdTime.textContent = toLabel(h);
+        tdPrice.textContent = "$30";
+
+        const span = document.createElement("span");
+        span.className = "slot-status-pill";
+
+        let isAvailable = h % 3 !== 0;
+
+        if (selectedDate && reservations.length) {
+          reservations.forEach(r => {
+            const [ry, rm, rd] = r.date;
+            const rDateStr = `${ry}-${rm}-${rd}`;
+            const [rh] = r.slotStartTime;
+            if (rDateStr === selectedDate && rh === h) {
+              isAvailable = false;
+            }
+          });
+        }
+
+        if (isAvailable) {
+          span.classList.add("available");
+          span.textContent = "Available";
+        } else {
+          span.classList.add("not-available");
+          span.textContent = "Not Available";
+        }
+        tdStatus.appendChild(span);
+
+        tr.appendChild(tdTime);
+        tr.appendChild(tdPrice);
+        tr.appendChild(tdStatus);
+        tbodySlots.appendChild(tr);
+      }
+    }
+
     // CALENDAR
     document.addEventListener("DOMContentLoaded", function () {
       const monthLabel = document.getElementById("cal-month-label");
@@ -496,6 +555,9 @@
                   .querySelectorAll(".calendar-day--selected")
                   .forEach(el => el.classList.remove("calendar-day--selected"));
                 td.classList.add("calendar-day--selected");
+                // update selection and slots
+                selectedDate = td.dataset.date;
+                renderSlots();
               });
               if (year === 2024 && month === 6 && cellDay === 20) {
                 td.classList.add("calendar-day--selected");
@@ -519,6 +581,12 @@
       };
 
       renderCalendar();
+      // initialize selectedDate if one cell was marked during render
+      const initial = tbody.querySelector(".calendar-day--selected");
+      if (initial) {
+        selectedDate = initial.dataset.date;
+        renderSlots();
+      }
     });
 
     // CAROUSEL
@@ -600,10 +668,41 @@
 
     const response = fetch("https://s2ivor7el9.execute-api.ap-south-1.amazonaws.com/dev/court/7556a3b5-29f1-472c-9494-dcbe76c930a2").then(res => res.json()).then(data => {
       console.log("API Response:", data);
+      // store reservations for slot rendering
+      reservations = data.reservations || [];
+      if (selectedDate) renderSlots();
+      // Update the slot title with the name from backend
+      const slotTitle = document.querySelector('.slot-title');
+      if (slotTitle && data.court && data.court.name) {
+        slotTitle.textContent = data.court.name;
+      }
+      // Update the slot address with the address from backend
+      const slotAddress = document.querySelector('.slot-address');
+      if (slotAddress && data.court && data.court.addressLine1 && data.court.addressLine2 && data.court.addressLine3) {
+        slotAddress.textContent = `${data.court.addressLine1} ${data.court.addressLine2} ${data.court.addressLine3}`;
+      }
+      // Make the map clickable to open Google Maps with the address and show static image
+      const mapImg = document.querySelector('.slot-map-img');
+      if (mapImg) {
+        mapImg.style.cursor = 'pointer';
+        mapImg.addEventListener('click', () => {
+          const address = slotAddress ? slotAddress.textContent : '123 Main Street, Anyplace, USA';
+          const encodedAddress = encodeURIComponent(address);
+          window.open(`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`, '_blank');
+        });
+
+        // Update image src to a Google Maps static image (replace YOUR_API_KEY with a valid key)
+        const addr = slotAddress ? slotAddress.textContent : '123 Main Street, Anyplace, USA';
+        const enc = encodeURIComponent(addr);
+        mapImg.src = `https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=15&size=320x120&markers=color:red%7C${enc}&key=YOUR_API_KEY`;
+      }
     }).catch(err => {
       console.error("API Error:", err);
     });
+    
   </script>
+
+
 </head>
 <body>
   <!-- NAVBAR -->
@@ -634,13 +733,13 @@
             <div class="carousel">
               <div class="carousel-track">
                 <div class="carousel-slide">
-                  <img src="https://placehold.co/640x160?text=Image+1" alt="Stadium 1" />
+                  <img src="https://wallpapercave.com/wp/wp2302343.jpg" alt="Stadium 1" />
                 </div>
                 <div class="carousel-slide">
-                  <img src="https://placehold.co/640x160?text=Image+2" alt="Stadium 2" />
+                  <img src="https://img.freepik.com/premium-photo/professional-badminton-court-with-high-ceilings-lighting_641503-92811.jpg" alt="Stadium 2" />
                 </div>
                 <div class="carousel-slide">
-                  <img src="https://placehold.co/640x160?text=Image+3" alt="Stadium 3" />
+                  <img src="https://wallpapercave.com/wp/wp2302358.jpg" alt="Stadium 3" />
                 </div>
               </div>
               <button class="carousel-arrow carousel-arrow--left">&#10094;</button>
@@ -660,7 +759,7 @@
             </div>
           </div> -->
 
-          <div class="slot-title">City Sports Arena</div>
+          <div class="slot-title">Name Error</div>
           <div class="slot-address">123 Main Street, Anyplace, USA</div>
 
           <div class="calendar-wrapper">
